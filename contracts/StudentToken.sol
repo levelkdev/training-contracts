@@ -10,5 +10,5 @@ contract StudentToken {
   function balanceOf(address who) public view returns (uint256);
   function transfer(address to, uint256 value) public returns (bool);
   
-  function () payable public;
+  function purchase() payable public;
 }
