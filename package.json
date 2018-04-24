@@ -1,5 +1,5 @@
 {
-  "name": "react-box",
+  "name": "training",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -98,5 +98,20 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  }
+  },
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/levelkdev/training-contracts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/levelkdev/training-contracts/issues"
+  },
+  "homepage": "https://github.com/levelkdev/training-contracts#readme",
+  "description": ""
 }

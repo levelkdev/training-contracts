@@ -2,6 +2,14 @@ import React, { Component } from 'react'
 import SimpleStorageContract from '../build/contracts/SimpleStorage.json'
 import getWeb3 from './utils/getWeb3'
 
+import johnp from './img/johnp.jpeg';
+import akua from './img/akua.jpeg';
+import johnk from './img/johnk.jpeg';
+import chris from './img/chris.jpeg';
+import alex from './img/alex.jpeg';
+import emily from './img/emily.jpeg';
+import raybman from './img/raybman.jpeg';
+import mahesh from './img/mahesh.jpeg';
 import './css/oswald.css'
 import './css/open-sans.css'
 import './css/pure-min.css'
@@ -70,22 +78,80 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <nav className="navbar pure-menu pure-menu-horizontal">
-            <a href="#" className="pure-menu-heading pure-menu-link">Truffle Box</a>
-        </nav>
 
-        <main className="container">
-          <div className="pure-g">
-            <div className="pure-u-1-1">
-              <h1>Good to Go!</h1>
-              <p>Your Truffle Box is installed and ready.</p>
-              <h2>Smart Contract Example</h2>
-              <p>If your contracts compiled and migrated successfully, below will show a stored value of 5 (by default).</p>
-              <p>Try changing the value stored on <strong>line 59</strong> of App.js.</p>
-              <p>The stored value is: {this.state.storageValue}</p>
+
+        <div className="home">
+
+          <div className="header">TA's: Make a tip</div>
+          <div className="balance">Your balance: ### CLS</div>
+          <div className="container">
+            <div className="row">
+              <div className="colsmall">
+                <div><img className="circle" src={johnp} alt={"John P"}/>
+                </div>
+                <div className="taname">John Pignata</div>
+                <div className="taname balance">### CLS</div>
+                <div className="taname"><button title="TIP">TIP</button></div>
+              </div>
+              <div className="colsmall">
+                <div><img className="circle" src={akua} alt={"Akua"}/>
+                </div>
+                <div className="taname">Akua Nte</div>
+                <div className="taname balance">### CLS</div>
+                <div className="taname"><button title="TIP">TIP</button></div>
+              </div>
+
+              <div className="colsmall">
+                <div><img className="circle" src={johnk} alt={"John K"}/>
+                </div>
+                <div className="taname">John Kelleher</div>
+                <div className="taname balance">### CLS</div>
+                <div className="taname"><button title="TIP">TIP</button></div>
+              </div>
+              <div className="colsmall">
+                <div><img className="circle" src={chris} alt={"Chris"}/>
+                </div>
+                <div className="taname">Chris Whinfrey</div>
+                <div className="taname balance">### CLS</div>
+                <div className="taname"><button title="TIP">TIP</button></div>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="colsmall">
+                <div><img className="circle" src={alex} alt={"Alex"}/>
+                </div>
+                <div className="taname">Alex Higuera</div>
+                <div className="taname balance">### CLS</div>
+                <div className="taname"><button title="TIP">TIP</button></div>
+              </div>
+              <div className="colsmall">
+                <div><img className="circle" src={emily} alt={"Emily"}/>
+                </div>
+                <div className="taname">Emily Williams</div>
+                <div className="taname balance">### CLS</div>
+                <div className="taname"><button title="TIP">TIP</button></div>
+              </div>
+
+              <div className="colsmall">
+                <div><img className="circle" src={raybman} alt={"Raybman"}/>
+                </div>
+                <div className="taname">Michael Raybman</div>
+                <div className="taname balance">### CLS</div>
+                <div className="taname"><button title="TIP">TIP</button></div>
+              </div>
+              <div className="colsmall">
+                <div><img className="circle" src={mahesh} alt={"Mahesh"}/>
+                </div>
+                <div className="taname">Mahesh Murthy</div>
+                <div className="taname balance">### CLS</div>
+                <div className="taname"><button title="TIP">TIP</button></div>
+              </div>
             </div>
           </div>
-        </main>
+
+        </div>
+
       </div>
     );
   }
