@@ -1,10 +1,7 @@
 /* TRAINING CSS */
 
 .home {
-  //background: linear-gradient(to bottom right, #2e3141 50%, orange);
-  //background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
   background-color: #89a8f1;
-  //background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
   padding: 20px;
   text-align: center;
   color: white;
@@ -46,26 +43,24 @@
 
 .circle {
   border: white solid 4px;
-  //border-radius: 70%;
-
   display: block;
-    height: 120px;
-    width: 120px;
-    line-height: 60px;
-    margin: 50px;
-    -moz-border-radius: 40%;
-    border-radius: 50%;
-
-    background-color: #89a8f1;
-    color: white;
-    text-align: center;
-    font-size: 2em; 
+  height: 120px;
+  width: 120px;
+  line-height: 60px;
+  margin: 50px;
+  -moz-border-radius: 40%;
+  border-radius: 50%;
+  background-color: #89a8f1;
+  color: white;
+  text-align: center;
+  font-size: 2em; 
 }
 
 .taname{
   margin-left: -60px;
     margin-top: -25px;
 }
+
 .taname button{
   margin-left: 100px;
     margin-top: 40px;
@@ -73,8 +68,12 @@
     line-height: 0px;
 }
 
+.balance {
+  margin-top: 10px;
+}
+
 .header {
-  margin: 50px;
+  margin-top: 25px;
   font-size: 40px;  
   text-align: center;
   color: #ECEFF1;

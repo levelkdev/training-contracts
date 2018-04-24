@@ -90,12 +90,14 @@ class App extends Component {
                 <div><img className="circle" src={johnp} alt={"John P"}/>
                 </div>
                 <div className="taname">John Pignata</div>
+                <div className="taname balance">### CLS</div>
                 <div className="taname"><button title="TIP">TIP</button></div>
               </div>
               <div className="colsmall">
                 <div><img className="circle" src={akua} alt={"Akua"}/>
                 </div>
                 <div className="taname">Akua Nte</div>
+                <div className="taname balance">### CLS</div>
                 <div className="taname"><button title="TIP">TIP</button></div>
               </div>
 
@@ -103,12 +105,14 @@ class App extends Component {
                 <div><img className="circle" src={johnk} alt={"John K"}/>
                 </div>
                 <div className="taname">John Kelleher</div>
+                <div className="taname balance">### CLS</div>
                 <div className="taname"><button title="TIP">TIP</button></div>
               </div>
               <div className="colsmall">
                 <div><img className="circle" src={chris} alt={"Chris"}/>
                 </div>
                 <div className="taname">Chris Whinfrey</div>
+                <div className="taname balance">### CLS</div>
                 <div className="taname"><button title="TIP">TIP</button></div>
               </div>
             </div>
@@ -118,12 +122,14 @@ class App extends Component {
                 <div><img className="circle" src={alex} alt={"Alex"}/>
                 </div>
                 <div className="taname">Alex Higuera</div>
+                <div className="taname balance">### CLS</div>
                 <div className="taname"><button title="TIP">TIP</button></div>
               </div>
               <div className="colsmall">
                 <div><img className="circle" src={emily} alt={"Emily"}/>
                 </div>
                 <div className="taname">Emily Williams</div>
+                <div className="taname balance">### CLS</div>
                 <div className="taname"><button title="TIP">TIP</button></div>
               </div>
 
@@ -131,20 +137,20 @@ class App extends Component {
                 <div><img className="circle" src={raybman} alt={"Raybman"}/>
                 </div>
                 <div className="taname">Michael Raybman</div>
+                <div className="taname balance">### CLS</div>
                 <div className="taname"><button title="TIP">TIP</button></div>
               </div>
               <div className="colsmall">
                 <div><img className="circle" src={mahesh} alt={"Mahesh"}/>
                 </div>
                 <div className="taname">Mahesh Murthy</div>
+                <div className="taname balance">### CLS</div>
                 <div className="taname"><button title="TIP">TIP</button></div>
               </div>
             </div>
           </div>
 
-    
         </div>
-
 
       </div>
     );
