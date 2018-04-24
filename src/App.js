@@ -83,7 +83,7 @@ class App extends Component {
         <div className="home">
 
           <div className="header">TA's: Make a tip</div>
-      
+          <div className="balance">Your balance: ### CLS</div>
           <div className="container">
             <div className="row">
               <div className="colsmall">
