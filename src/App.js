@@ -70,22 +70,74 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <nav className="navbar pure-menu pure-menu-horizontal">
-            <a href="#" className="pure-menu-heading pure-menu-link">Truffle Box</a>
-        </nav>
 
-        <main className="container">
-          <div className="pure-g">
-            <div className="pure-u-1-1">
-              <h1>Good to Go!</h1>
-              <p>Your Truffle Box is installed and ready.</p>
-              <h2>Smart Contract Example</h2>
-              <p>If your contracts compiled and migrated successfully, below will show a stored value of 5 (by default).</p>
-              <p>Try changing the value stored on <strong>line 59</strong> of App.js.</p>
-              <p>The stored value is: {this.state.storageValue}</p>
+
+        <div className="home">
+
+          <div className="header">TA's: Make a tip</div>
+
+          <div className="container">
+            <div className="row">
+              <div className="colsmall">
+                <div className="circle"><img src=""/>
+                </div>
+                <div className="taname">John Pignata</div>
+                <div className="taname"><button onClick="alert(hi)" title="TIP">TIP</button></div>
+              </div>
+              <div className="colsmall">
+                <div className="circle"><img src=""/>
+                </div>
+                <div className="taname">Akua Nte</div>
+                <div className="taname"><button title="TIP">TIP</button></div>
+              </div>
+
+              <div className="colsmall">
+                <div className="circle"><img src=""/>
+                </div>
+                <div className="taname">John Kelleher</div>
+                <div className="taname"><button onClick="alert(hi)" title="TIP">TIP</button></div>
+              </div>
+              <div className="colsmall">
+                <div className="circle"><img src=""/>
+                </div>
+                <div className="taname">Chris Whinfrey</div>
+                <div className="taname"><button title="TIP">TIP</button></div>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="colsmall">
+                <div className="circle"><img src=""/>
+                </div>
+                <div className="taname">Alex Higuera</div>
+                <div className="taname"><button onClick="alert(hi)" title="TIP">TIP</button></div>
+              </div>
+              <div className="colsmall">
+                <div className="circle"><img src=""/>
+                </div>
+                <div className="taname">Emily Williams</div>
+                <div className="taname"><button title="TIP">TIP</button></div>
+              </div>
+
+              <div className="colsmall">
+                <div className="circle"><img src=""/>
+                </div>
+                <div className="taname">Michael Raybman</div>
+                <div className="taname"><button onClick="alert(hi)" title="TIP">TIP</button></div>
+              </div>
+              <div className="colsmall">
+                <div className="circle"><img src=""/>
+                </div>
+                <div className="taname">Mahesh Murthy</div>
+                <div className="taname"><button title="TIP">TIP</button></div>
+              </div>
             </div>
           </div>
-        </main>
+
+    
+        </div>
+
+
       </div>
     );
   }
