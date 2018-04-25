@@ -27,7 +27,10 @@ class App extends Component {
       web3: null,
       listings: [],
       balances: '',
-      names: ['johnp', 'akua', 'johnk', 'chris', 'alex', 'emily', 'raybman', 'Mahesh']
+      names: ['johnp', 'akua', 'johnk', 'chris', 'alex', 'emily', 'raybman', 'Mahesh'],
+      tokenName: 'AAA Token',
+      tokenSymbol: 'AAA', 
+      tokenContractAddress: '0x662564aac2c888eb3d0d3be1b599b38bcb8a3291'
     }
   }
 
@@ -223,9 +226,40 @@ class App extends Component {
 
 
           <div className="container">
+            <div className="tokenList header">List of Tokens:</div>
+
+            <table>
+              <tr className="tableRow">
+                <th className="cellEntry"><i>Token Name:</i></th>
+                <th className="cellEntry"><i>Token Symbol:</i></th> 
+                <th className="cellEntry"><i>Token Contract Address:</i></th> 
+              </tr>
+              <tr className="tableRow">
+                <th className="cellEntry">{this.state.tokenName}</th>
+                <th className="cellEntry">{this.state.tokenSymbol}</th> 
+                <th className="cellEntry" >{this.state.tokenContractAddress}</th> 
+              </tr>
+              <tr className="tableRow">
+                <th className="cellEntry">{this.state.tokenName}</th>
+                <th className="cellEntry">{this.state.tokenSymbol}</th> 
+                <th className="cellEntry" >{this.state.tokenContractAddress}</th> 
+              </tr>
+              <tr className="tableRow">
+                <th className="cellEntry">{this.state.tokenName}</th>
+                <th className="cellEntry">{this.state.tokenSymbol}</th> 
+                <th className="cellEntry" >{this.state.tokenContractAddress}</th> 
+              </tr>
+              <tr className="tableRow">
+                <th className="cellEntry"></th>
+                <th className="cellEntry"></th> 
+                <th className="cellEntry"></th> 
+              </tr>
+            </table>
+
           </div>
 
         </div>
+
 
       </div>
     );
