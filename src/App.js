@@ -171,7 +171,7 @@ class App extends Component {
               <div className="colsmall">
                 <div><img className="circle" src={akua} alt={"Akua"}/>
                 </div>
-                <div className="taname">Akua Nte</div>
+                <div className="taname">Akua Nti</div>
                 <div className="taname balance">{this.state.balances.akua} CLS</div>
               </div>
 
