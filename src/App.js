@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 //import SimpleStorageContract from '../build/contracts/SimpleStorage.json'
 //import Class from '../build/contracts/Class.json'
 import TokenMaster from '../build/contracts/TokenMaster.json'
+import StudentToken from '../build/contracts/StudentToken.json'
+import ClassToken from '../build/contracts/ClassToken.json'
 import getWeb3 from './utils/getWeb3'
 import contract from 'truffle-contract'
 
@@ -26,13 +28,10 @@ class App extends Component {
       storageValue: [],
       web3: null,
       listings: [],
+      balance: 0,
       balances: {},
       names: ['johnp', 'akua', 'johnk', 'chris', 'alex', 'emily', 'mike', 'mahesh'],
-      tokenList: [
-        {tokenName: 'AAA Token', tokenSymbol: 'AAA', address: '0x662564aac2c888eb3d0d3be1b599b38bcb8a3291'},
-        {tokenName: 'BBB Token', tokenSymbol: 'BBB', address: '0x662564aac2c888eb3d0d3be1b599b38bcb8a3291'},
-        {tokenName: 'CCC Token', tokenSymbol: 'CCC', address: '0x662564aac2c888eb3d0d3be1b599b38bcb8a3291'}
-      ],
+      tokenList: [],
     }
   }
 
@@ -50,6 +49,7 @@ class App extends Component {
       this.instantiateContract()
       this.taTips()
       this.tokenListings()
+      this.getBalance()
     })
     .catch(() => {
       console.log('Error finding web3.')
@@ -69,36 +69,6 @@ class App extends Component {
         return this.setState({ storageValue: result })
       })
     })
-
-    /*
-     * SMART CONTRACT EXAMPLE
-     *
-     * Normally these functions would be called in the context of a
-     * state management library, but for convenience I've placed them here.
-     */
-
-/*    const contract = require('truffle-contract')
-    const simpleStorage = contract(SimpleStorageContract)
-    simpleStorage.setProvider(this.state.web3.currentProvider)
-
-    // Declaring this for later so we can chain functions on SimpleStorage.
-    var simpleStorageInstance
-
-    // Get accounts.
-    this.state.web3.eth.getAccounts((error, accounts) => {
-      simpleStorage.deployed().then((instance) => {
-        simpleStorageInstance = instance
-
-        // Stores a given value, 5 by default.
-        return simpleStorageInstance.set(5, {from: accounts[0]})
-      }).then((result) => {
-        // Get the value from the contract to prove it worked.
-        return simpleStorageInstance.get.call(accounts[0])
-      }).then((result) => {
-        // Update state with the result.
-        return this.setState({ storageValue: result.c[0] })
-      })
-    })*/
 
   }
 
@@ -127,14 +97,19 @@ class App extends Component {
         tokenMasterInstance = instance
         return tokenMasterInstance.getTokenList()
       }).then((listings) => {
-        return Promise.all(listings.map(entry => this.getEntry(tokenMasterInstance, entry)))
-      }).then((listings) => {
         console.log("set state " + listings)
+        return Promise.all(listings.map(tokenAddress => this.getStudentToken(tokenAddress)))
+      }).then((listings) => {
+        this.state.tokenList.forEach(token => this.logToken(token))
         //this.setState({listings: listings})
       }).catch((error) => {
         console.log(error)
       })
     })
+  }
+
+  logToken(token) {
+    console.log("name: " + token.tokenName + " symbol: " + token.tokenSymbol + " address: " + token.address)
   }
 
   getTokenMaster() {
@@ -143,15 +118,19 @@ class App extends Component {
     return tokenMaster.deployed()
   }
 
-  getEntry(tokenMasterInstance, entry) {
-    return tokenMasterInstance.getTokenList().then((listing) => {
-      console.log(listing)
-      this.setState({listings: listing})
-      return {
-        tokenList: entry,
-        name: window.web3.toAscii(entry),
-        address: listing
-      }
+  getStudentToken(address) {
+    const studentTokenContract = contract(StudentToken)
+    studentTokenContract.setProvider(this.state.web3.currentProvider)
+    var studentToken = studentTokenContract.at(address)
+    var newToken = {address: address}
+    var tokenList = this.state.tokenList
+    return studentToken.name().then((name) => {
+      newToken.tokenName = name
+      return studentToken.symbol()
+    }).then((symbol) => {
+      newToken.tokenSymbol = symbol
+      tokenList.push(newToken)
+      this.setState({tokenList: tokenList})
     })
   }
 
@@ -180,7 +159,6 @@ class App extends Component {
 
         <div className="home">
           <div className="header">TA's: Make a tip</div>
-          <div className="balance">Your balance: {this.state.listings} CLS</div>
           
           <div className="container">
             <div className="row">
