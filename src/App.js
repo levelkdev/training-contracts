@@ -29,7 +29,12 @@ class App extends Component {
       web3: null,
       listings: [],
       balances: {},
-      names: ['johnp', 'akua', 'johnk', 'chris', 'alex', 'emily', 'mike', 'mahesh']
+      names: ['johnp', 'akua', 'johnk', 'chris', 'alex', 'emily', 'mike', 'mahesh'],
+      tokenList: [
+        {tokenName: 'AAA Token', tokenSymbol: 'AAA', address: '0x662564aac2c888eb3d0d3be1b599b38bcb8a3291'},
+        {tokenName: 'BBB Token', tokenSymbol: 'BBB', address: '0x662564aac2c888eb3d0d3be1b599b38bcb8a3291'},
+        {tokenName: 'CCC Token', tokenSymbol: 'CCC', address: '0x662564aac2c888eb3d0d3be1b599b38bcb8a3291'}
+      ],
       tokenName: 'AAA Token',
       tokenSymbol: 'AAA', 
       tokenContractAddress: '0x662564aac2c888eb3d0d3be1b599b38bcb8a3291'
