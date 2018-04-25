@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
-import SimpleStorageContract from '../build/contracts/SimpleStorage.json'
+//import SimpleStorageContract from '../build/contracts/SimpleStorage.json'
+//import Class from '../build/contracts/Class.json'
+import TokenMaster from '../build/contracts/TokenMaster.json'
 import getWeb3 from './utils/getWeb3'
+import contract from 'truffle-contract'
 
 import johnp from './img/johnp.jpeg';
 import akua from './img/akua.jpeg';
@@ -37,6 +40,8 @@ class App extends Component {
 
       // Instantiate contract once web3 provided.
       this.instantiateContract()
+      this.listings()
+      this.tokenListings()
     })
     .catch(() => {
       console.log('Error finding web3.')
@@ -44,6 +49,19 @@ class App extends Component {
   }
 
   instantiateContract() {
+    var tokenMasterInstance
+
+    // Get accounts.
+    this.state.web3.eth.getAccounts((error, accounts) => {
+      this.getTokenMaster().then((instance) => {
+        tokenMasterInstance = instance
+        return tokenMasterInstance.tokenList.call()
+      }).then((result) => {
+        // Update state with the result.
+        return this.setState({ storageValue: result })
+      })
+    })
+
     /*
      * SMART CONTRACT EXAMPLE
      *
@@ -51,7 +69,7 @@ class App extends Component {
      * state management library, but for convenience I've placed them here.
      */
 
-    const contract = require('truffle-contract')
+/*    const contract = require('truffle-contract')
     const simpleStorage = contract(SimpleStorageContract)
     simpleStorage.setProvider(this.state.web3.currentProvider)
 
@@ -72,10 +90,51 @@ class App extends Component {
         // Update state with the result.
         return this.setState({ storageValue: result.c[0] })
       })
+    })*/
+
+  }
+
+  //registryInstance = tokenMasterInstance
+  //getRegistry = getTokenMaster
+  //returns an array of token addresses: tokenList
+  listings () {
+    var tokenMasterInstance
+    this.state.web3.eth.getAccounts((error, accounts) => {
+      this.getTokenMaster().then((instance) => {
+        tokenMasterInstance = instance
+        return tokenMasterInstance.getTokenList()
+      }).then((listings) => {
+        return Promise.all(listings.map(entry => this.getEntry(tokenMasterInstance, entry)))
+      }).then((listings) => {
+        console.log("set state " + listings)
+        this.setState({listings: listings})
+      }).catch((error) => {
+        console.log(error)
+      })
+    })
+  }
+
+  getTokenMaster() {
+    const tokenMaster = contract(TokenMaster)
+    tokenMaster.setProvider(this.state.web3.currentProvider)
+    return tokenMaster.deployed()
+  }
+
+  getEntry(tokenMasterInstance, entry) {
+    return tokenMasterInstance.listings(name).then((listing) => {
+      console.log(listing)
+      return {
+        tokenList: entry,
+        name: window.web3.toAscii(entry),
+        //tokenEntry: listing[1]
+      }
     })
   }
 
   render() {
+    const listItems = this.state.listings.map((entry) =>
+      <li key={entry.name}>{entry.name} </li>
+    );
     return (
       <div className="App">
 
@@ -83,14 +142,15 @@ class App extends Component {
         <div className="home">
 
           <div className="header">TA's: Make a tip</div>
-          <div className="balance">Your balance: ### CLS</div>
+          <div className="balance">Your balance: {this.state.storageValue} CLS</div>
+          <div>{listItems}</div>
           <div className="container">
             <div className="row">
               <div className="colsmall">
                 <div><img className="circle" src={johnp} alt={"John P"}/>
                 </div>
                 <div className="taname">John Pignata</div>
-                <div className="taname balance">### CLS</div>
+                <div className="taname balance">{this.state.storageValue} CLS</div>
                 <div className="taname"><button title="TIP">TIP</button></div>
               </div>
               <div className="colsmall">
@@ -148,6 +208,10 @@ class App extends Component {
                 <div className="taname"><button title="TIP">TIP</button></div>
               </div>
             </div>
+          </div>
+
+
+          <div className="container">
           </div>
 
         </div>
