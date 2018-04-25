@@ -23,8 +23,11 @@ class App extends Component {
     super(props)
 
     this.state = {
-      storageValue: 0,
-      web3: null
+      storageValue: [],
+      web3: null,
+      listings: [],
+      balances: '',
+      names: ['johnp', 'akua', 'johnk', 'chris', 'alex', 'emily', 'raybman', 'Mahesh']
     }
   }
 
@@ -106,8 +109,10 @@ class App extends Component {
       }).then((listings) => {
         return Promise.all(listings.map(entry => this.getEntry(tokenMasterInstance, entry)))
       }).then((listings) => {
+        return Promise.all(listings.map(entry => this.getTATipTotal(tokenMasterInstance, 'Mahesh')))
+      }).then((listings) => {
         console.log("set state " + listings)
-        this.setState({listings: listings})
+        //this.setState({listings: listings})
       }).catch((error) => {
         console.log(error)
       })
@@ -121,13 +126,21 @@ class App extends Component {
   }
 
   getEntry(tokenMasterInstance, entry) {
-    return tokenMasterInstance.listings(name).then((listing) => {
+    return tokenMasterInstance.getTokenList().then((listing) => {
       console.log(listing)
+      this.setState({listings: listing})
       return {
         tokenList: entry,
         name: window.web3.toAscii(entry),
-        //tokenEntry: listing[1]
+        address: listing
       }
+    })
+  }
+
+  getTATipTotal(tokenMasterInstance, name) {
+    return tokenMasterInstance.gettTaTipTotal(this.state.names[7]).then((balance) => {
+      console.log(balance.toString())
+      this.setState({balances: balance.toString()})
     })
   }
 
@@ -140,7 +153,7 @@ class App extends Component {
         <div className="home">
 
           <div className="header">TA's: Make a tip</div>
-          <div className="balance">Your balance: {this.state.storageValue} CLS</div>
+          <div className="balance">Your balance: {this.state.listings} CLS</div>
           
           <div className="container">
             <div className="row">
@@ -148,7 +161,7 @@ class App extends Component {
                 <div><img className="circle" src={johnp} alt={"John P"}/>
                 </div>
                 <div className="taname">John Pignata</div>
-                <div className="taname balance">{this.state.storageValue} CLS</div>
+                <div className="taname balance">{this.state.balances} CLS</div>
                 <div className="taname"><button title="TIP">TIP</button></div>
               </div>
               <div className="colsmall">
