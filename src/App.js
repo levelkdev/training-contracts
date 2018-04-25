@@ -28,9 +28,9 @@ class App extends Component {
       listings: [],
       balances: '',
       names: ['johnp', 'akua', 'johnk', 'chris', 'alex', 'emily', 'raybman', 'Mahesh'],
-      tokenName: 'AAA Token',
-      tokenSymbol: 'AAA', 
-      tokenContractAddress: '0x662564aac2c888eb3d0d3be1b599b38bcb8a3291'
+      tokenNames: ['AAA Token', 'BBB Token', 'CCC Token'],
+      tokenSymbols: ['AAA', 'BBB', 'CCC'], 
+      tokenContractAddresses: ['0x662564aac2c888eb3d0d3be1b599b38bcb8a3291', '0x662564aac2c888eb3d0d3be1b599b38bcb8a3292', '0x662564aac2c888eb3d0d3be1b599b38bcb8a3293'],
     }
   }
 
@@ -148,13 +148,20 @@ class App extends Component {
   }
 
   render() {
-
+    const tokenNames = this.state.tokenNames.map((name) =>
+      <li >{name}</li>
+    );
+    const tokenSymbols = this.state.tokenSymbols.map((symbol) =>
+      <li >{symbol}</li>
+    );
+    const tokenContractAddresses = this.state.tokenContractAddresses.map((address) =>
+      <li >{address}</li>
+    );
     return (
       <div className="App">
 
 
         <div className="home">
-
           <div className="header">TA's: Make a tip</div>
           <div className="balance">Your balance: {this.state.listings} CLS</div>
           
@@ -227,7 +234,6 @@ class App extends Component {
 
           <div className="container">
             <div className="tokenList header">List of Tokens:</div>
-
             <table>
               <tr className="tableRow">
                 <th className="cellEntry"><i>Token Name:</i></th>
@@ -235,24 +241,9 @@ class App extends Component {
                 <th className="cellEntry"><i>Token Contract Address:</i></th> 
               </tr>
               <tr className="tableRow">
-                <th className="cellEntry">{this.state.tokenName}</th>
-                <th className="cellEntry">{this.state.tokenSymbol}</th> 
-                <th className="cellEntry" >{this.state.tokenContractAddress}</th> 
-              </tr>
-              <tr className="tableRow">
-                <th className="cellEntry">{this.state.tokenName}</th>
-                <th className="cellEntry">{this.state.tokenSymbol}</th> 
-                <th className="cellEntry" >{this.state.tokenContractAddress}</th> 
-              </tr>
-              <tr className="tableRow">
-                <th className="cellEntry">{this.state.tokenName}</th>
-                <th className="cellEntry">{this.state.tokenSymbol}</th> 
-                <th className="cellEntry" >{this.state.tokenContractAddress}</th> 
-              </tr>
-              <tr className="tableRow">
-                <th className="cellEntry"></th>
-                <th className="cellEntry"></th> 
-                <th className="cellEntry"></th> 
+                <th>{tokenNames}</th>
+                <th>{tokenSymbols}</th>
+                <th>{tokenContractAddresses}</th>
               </tr>
             </table>
 
