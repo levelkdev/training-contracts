@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 //import Class from '../build/contracts/Class.json'
 import TokenMaster from '../build/contracts/TokenMaster.json'
 import StudentToken from '../build/contracts/StudentToken.json'
+import ClassToken from '../build/contracts/ClassToken.json'
 import getWeb3 from './utils/getWeb3'
 import contract from 'truffle-contract'
 
@@ -27,13 +28,10 @@ class App extends Component {
       storageValue: [],
       web3: null,
       listings: [],
+      balance: 0,
       balances: {},
       names: ['johnp', 'akua', 'johnk', 'chris', 'alex', 'emily', 'mike', 'mahesh'],
-      tokenList: [
-        {tokenName: 'AAA Token', tokenSymbol: 'AAA', address: '0x662564aac2c888eb3d0d3be1b599b38bcb8a3291'},
-        {tokenName: 'BBB Token', tokenSymbol: 'BBB', address: '0x662564aac2c888eb3d0d3be1b599b38bcb8a3291'},
-        {tokenName: 'CCC Token', tokenSymbol: 'CCC', address: '0x662564aac2c888eb3d0d3be1b599b38bcb8a3291'}
-      ],
+      tokenList: [],
     }
   }
 
@@ -51,6 +49,7 @@ class App extends Component {
       this.instantiateContract()
       this.taTips()
       this.tokenListings()
+      this.getBalance()
     })
     .catch(() => {
       console.log('Error finding web3.')
@@ -108,9 +107,9 @@ class App extends Component {
       })
     })
   }
-  
+
   logToken(token) {
-    console.log("name: " + token.name + "symbol: " + token.symbol + "address: " + token.address)
+    console.log("name: " + token.tokenName + " symbol: " + token.tokenSymbol + " address: " + token.address)
   }
 
   getTokenMaster() {
@@ -126,10 +125,10 @@ class App extends Component {
     var newToken = {address: address}
     var tokenList = this.state.tokenList
     return studentToken.name().then((name) => {
-      newToken.name = name
+      newToken.tokenName = name
       return studentToken.symbol()
     }).then((symbol) => {
-      newToken.symbol = symbol
+      newToken.tokenSymbol = symbol
       tokenList.push(newToken)
       this.setState({tokenList: tokenList})
     })
@@ -160,7 +159,6 @@ class App extends Component {
 
         <div className="home">
           <div className="header">TA's: Make a tip</div>
-          <div className="balance">Your balance: {this.state.listings} CLS</div>
           
           <div className="container">
             <div className="row">
