@@ -11,12 +11,14 @@ import johnk from './img/johnk.jpeg';
 import chris from './img/chris.jpeg';
 import alex from './img/alex.jpeg';
 import emily from './img/emily.jpeg';
-import raybman from './img/raybman.jpeg';
+import mike from './img/raybman.jpeg';
 import mahesh from './img/mahesh.jpeg';
 import './css/oswald.css'
 import './css/open-sans.css'
 import './css/pure-min.css'
 import './App.css'
+
+
 
 class App extends Component {
   constructor(props) {
@@ -26,8 +28,8 @@ class App extends Component {
       storageValue: [],
       web3: null,
       listings: [],
-      balances: '',
-      names: ['johnp', 'akua', 'johnk', 'chris', 'alex', 'emily', 'raybman', 'Mahesh'],
+      balances: {},
+      names: ['johnp', 'akua', 'johnk', 'chris', 'alex', 'emily', 'mike', 'mahesh']
       tokenName: 'AAA Token',
       tokenSymbol: 'AAA', 
       tokenContractAddress: '0x662564aac2c888eb3d0d3be1b599b38bcb8a3291'
@@ -46,7 +48,7 @@ class App extends Component {
 
       // Instantiate contract once web3 provided.
       this.instantiateContract()
-      this.listings()
+      this.taTips()
       this.tokenListings()
     })
     .catch(() => {
@@ -100,10 +102,25 @@ class App extends Component {
 
   }
 
+  taTips () {
+    var tokenMasterInstance
+    this.state.web3.eth.getAccounts((error, accounts) => {
+      this.getTokenMaster().then((instance) => {
+        tokenMasterInstance = instance
+        return Promise.all(this.state.names.map(name => this.getTATipTotal(tokenMasterInstance, name)))
+      }).then(() => {
+        console.log("tip balances " + this.state.balances)
+        //this.setState({listings: listings})
+      }).catch((error) => {
+        console.log(error)
+      })
+    })
+  }
+
   //registryInstance = tokenMasterInstance
   //getRegistry = getTokenMaster
   //returns an array of token addresses: tokenList
-  listings () {
+  tokenListings () {
     var tokenMasterInstance
     this.state.web3.eth.getAccounts((error, accounts) => {
       this.getTokenMaster().then((instance) => {
@@ -111,8 +128,6 @@ class App extends Component {
         return tokenMasterInstance.getTokenList()
       }).then((listings) => {
         return Promise.all(listings.map(entry => this.getEntry(tokenMasterInstance, entry)))
-      }).then((listings) => {
-        return Promise.all(listings.map(entry => this.getTATipTotal(tokenMasterInstance, 'Mahesh')))
       }).then((listings) => {
         console.log("set state " + listings)
         //this.setState({listings: listings})
@@ -141,9 +156,11 @@ class App extends Component {
   }
 
   getTATipTotal(tokenMasterInstance, name) {
-    return tokenMasterInstance.gettTaTipTotal(this.state.names[7]).then((balance) => {
+    return tokenMasterInstance.gettTaTipTotal(name).then((balance) => {
       console.log(balance.toString())
-      this.setState({balances: balance.toString()})
+      var balances = this.state.balances
+      balances[name] = balance.toString()
+      this.setState({balances: balances})
     })
   }
 
@@ -164,30 +181,26 @@ class App extends Component {
                 <div><img className="circle" src={johnp} alt={"John P"}/>
                 </div>
                 <div className="taname">John Pignata</div>
-                <div className="taname balance">{this.state.balances} CLS</div>
-                <div className="taname"><button title="TIP">TIP</button></div>
+                <div className="taname balance">{this.state.balances.johnp} CLS</div>
               </div>
               <div className="colsmall">
                 <div><img className="circle" src={akua} alt={"Akua"}/>
                 </div>
                 <div className="taname">Akua Nte</div>
-                <div className="taname balance">### CLS</div>
-                <div className="taname"><button title="TIP">TIP</button></div>
+                <div className="taname balance">{this.state.balances.akua} CLS</div>
               </div>
 
               <div className="colsmall">
                 <div><img className="circle" src={johnk} alt={"John K"}/>
                 </div>
                 <div className="taname">John Kelleher</div>
-                <div className="taname balance">### CLS</div>
-                <div className="taname"><button title="TIP">TIP</button></div>
+                <div className="taname balance">{this.state.balances.johnk} CLS</div>
               </div>
               <div className="colsmall">
                 <div><img className="circle" src={chris} alt={"Chris"}/>
                 </div>
                 <div className="taname">Chris Whinfrey</div>
-                <div className="taname balance">### CLS</div>
-                <div className="taname"><button title="TIP">TIP</button></div>
+                <div className="taname balance">{this.state.balances.chris} CLS</div>
               </div>
             </div>
 
@@ -196,30 +209,26 @@ class App extends Component {
                 <div><img className="circle" src={alex} alt={"Alex"}/>
                 </div>
                 <div className="taname">Alex Higuera</div>
-                <div className="taname balance">### CLS</div>
-                <div className="taname"><button title="TIP">TIP</button></div>
+                <div className="taname balance">{this.state.balances.alex} CLS</div>
               </div>
               <div className="colsmall">
                 <div><img className="circle" src={emily} alt={"Emily"}/>
                 </div>
                 <div className="taname">Emily Williams</div>
-                <div className="taname balance">### CLS</div>
-                <div className="taname"><button title="TIP">TIP</button></div>
+                <div className="taname balance">{this.state.balances.johnp} CLS</div>
               </div>
 
               <div className="colsmall">
-                <div><img className="circle" src={raybman} alt={"Raybman"}/>
+                <div><img className="circle" src={mike} alt={"Raybman"}/>
                 </div>
                 <div className="taname">Michael Raybman</div>
-                <div className="taname balance">### CLS</div>
-                <div className="taname"><button title="TIP">TIP</button></div>
+                <div className="taname balance">{this.state.balances.mike} CLS</div>
               </div>
               <div className="colsmall">
                 <div><img className="circle" src={mahesh} alt={"Mahesh"}/>
                 </div>
                 <div className="taname">Mahesh Murthy</div>
-                <div className="taname balance">### CLS</div>
-                <div className="taname"><button title="TIP">TIP</button></div>
+                <div className="taname balance">{this.state.balances.mahesh} CLS</div>
               </div>
             </div>
           </div>
