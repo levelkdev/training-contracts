@@ -35,7 +35,7 @@ contract Class {
     uint256 bal = studentToken.balanceOf(address(this));
     require(bal > 0);
     token.mint(studentToken.owner(), 100 * 10 ** 18); // Mint 100 tokens for the token's owner
-    emit TokenPurchased(studentToken.name(), bal);
+    emit TokenPurchased(studentToken.name(), 100 * 10 ** 18);
   }
 
   function tipTA(string name, uint256 amount) public {

@@ -30,7 +30,7 @@ contract TokenMaster {
     token = new ClassToken();
   }
 
-  function purchaseTokens(StudentToken studentToken) onlyOwner public payable {
+  function purchaseTokens(StudentToken studentToken) public payable {
     studentToken.purchase.value(msg.value)(); // send the transaction value
     uint256 bal = studentToken.balanceOf(address(this));
     require(bal > 0); // check that tokens were purchased
