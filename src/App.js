@@ -18,8 +18,6 @@ import './css/open-sans.css'
 import './css/pure-min.css'
 import './App.css'
 
-
-
 class App extends Component {
   constructor(props) {
     super(props)
@@ -35,9 +33,6 @@ class App extends Component {
         {tokenName: 'BBB Token', tokenSymbol: 'BBB', address: '0x662564aac2c888eb3d0d3be1b599b38bcb8a3291'},
         {tokenName: 'CCC Token', tokenSymbol: 'CCC', address: '0x662564aac2c888eb3d0d3be1b599b38bcb8a3291'}
       ],
-      tokenName: 'AAA Token',
-      tokenSymbol: 'AAA', 
-      tokenContractAddress: '0x662564aac2c888eb3d0d3be1b599b38bcb8a3291'
     }
   }
 
@@ -170,13 +165,20 @@ class App extends Component {
   }
 
   render() {
-
+    const tokenNames = this.state.tokenList.map((tokenList) =>
+      <li >{tokenList.tokenName}</li>
+    );
+    const tokenSymbols = this.state.tokenList.map((tokenList) =>
+      <li >{tokenList.tokenSymbol}</li>
+    );
+    const tokenContractAddresses = this.state.tokenList.map((tokenList) =>
+      <li >{tokenList.address}</li>
+    );
     return (
       <div className="App">
 
 
         <div className="home">
-
           <div className="header">TA's: Make a tip</div>
           <div className="balance">Your balance: {this.state.listings} CLS</div>
           
@@ -208,7 +210,6 @@ class App extends Component {
                 <div className="taname balance">{this.state.balances.chris} CLS</div>
               </div>
             </div>
-
             <div className="row">
               <div className="colsmall">
                 <div><img className="circle" src={alex} alt={"Alex"}/>
@@ -241,7 +242,6 @@ class App extends Component {
 
           <div className="container">
             <div className="tokenList header">List of Tokens:</div>
-
             <table>
               <tr className="tableRow">
                 <th className="cellEntry"><i>Token Name:</i></th>
@@ -249,24 +249,9 @@ class App extends Component {
                 <th className="cellEntry"><i>Token Contract Address:</i></th> 
               </tr>
               <tr className="tableRow">
-                <th className="cellEntry">{this.state.tokenName}</th>
-                <th className="cellEntry">{this.state.tokenSymbol}</th> 
-                <th className="cellEntry" >{this.state.tokenContractAddress}</th> 
-              </tr>
-              <tr className="tableRow">
-                <th className="cellEntry">{this.state.tokenName}</th>
-                <th className="cellEntry">{this.state.tokenSymbol}</th> 
-                <th className="cellEntry" >{this.state.tokenContractAddress}</th> 
-              </tr>
-              <tr className="tableRow">
-                <th className="cellEntry">{this.state.tokenName}</th>
-                <th className="cellEntry">{this.state.tokenSymbol}</th> 
-                <th className="cellEntry" >{this.state.tokenContractAddress}</th> 
-              </tr>
-              <tr className="tableRow">
-                <th className="cellEntry"></th>
-                <th className="cellEntry"></th> 
-                <th className="cellEntry"></th> 
+                <th>{tokenNames}</th>
+                <th>{tokenSymbols}</th>
+                <th>{tokenContractAddresses}</th>
               </tr>
             </table>
 
