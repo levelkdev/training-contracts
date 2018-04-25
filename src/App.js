@@ -132,9 +132,7 @@ class App extends Component {
   }
 
   render() {
-    const listItems = this.state.listings.map((entry) =>
-      <li key={entry.name}>{entry.name} </li>
-    );
+
     return (
       <div className="App">
 
@@ -143,7 +141,7 @@ class App extends Component {
 
           <div className="header">TA's: Make a tip</div>
           <div className="balance">Your balance: {this.state.storageValue} CLS</div>
-          <div>{listItems}</div>
+          
           <div className="container">
             <div className="row">
               <div className="colsmall">
